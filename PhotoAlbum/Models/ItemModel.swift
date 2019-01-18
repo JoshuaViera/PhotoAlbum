@@ -14,7 +14,6 @@ final class ItemModel {
     private static var items = [Item]()
     
     static func getItems() -> [Item] {
-        // FileManager
         let path = DataPersistanceManager.filepathToDocumentDirectory(filename: filename).path
         if FileManager.default.fileExists(atPath: path) {
             if let data = FileManager.default.contents(atPath: path) {
@@ -34,13 +33,11 @@ final class ItemModel {
     }
     
     static func addItem(item: Item) {
-        //append tot the array of items
         items.append(item)
         save()
     }
     
     static func save() {
-        //path
         let path = DataPersistanceManager.filepathToDocumentDirectory(filename: filename)
         do {
             let data = try PropertyListEncoder().encode(items)
@@ -50,7 +47,7 @@ final class ItemModel {
         }
     }
     
-    static func delete(item: Item, atIndex index: Int) {
+    static func delete(atIndex index: Int) {
         items.remove(at: index)
         save()
     }

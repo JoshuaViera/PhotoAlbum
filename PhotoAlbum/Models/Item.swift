@@ -11,13 +11,14 @@ import Foundation
 struct Item : Codable {
     let description: String
     let createdAt: String
+    let imageData: Data
     
     public var dateFormattedString: String {
         let isoDateFormatter = ISO8601DateFormatter()
         var formattedDate = createdAt
         if let date = isoDateFormatter.date(from: createdAt){
             let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "MMMM d, yyy hh:mm a"//Junaury 11,2019 3:27 pm
+            dateFormatter.dateFormat = "MMMM d, yyy hh:mm a"
             formattedDate = dateFormatter.string(from: date)
             
         }

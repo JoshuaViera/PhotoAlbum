@@ -19,7 +19,6 @@
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="TZb-SW-xcu">
                                 <rect key="frame" x="0.0" y="20" width="375" height="603"/>
-                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="WgH-AT-mWp">
                                     <size key="itemSize" width="300" height="408"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -58,7 +57,6 @@
                                                 </button>
                                             </subviews>
                                         </view>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="trailingMargin" secondItem="uzF-zn-uog" secondAttribute="trailing" id="BUu-uj-4Zs"/>
                                             <constraint firstItem="Gt5-JV-Ue3" firstAttribute="centerY" secondItem="aqv-ml-Whe" secondAttribute="centerY" multiplier="0.6" id="D86-Zp-qWO"/>
@@ -76,6 +74,7 @@
                                         </constraints>
                                         <connections>
                                             <outlet property="caption" destination="409-9h-b4q" id="Wyw-Ac-z33"/>
+                                            <outlet property="optionsButton" destination="4Q3-v4-9RU" id="pMt-in-KNn"/>
                                             <outlet property="photo" destination="Gt5-JV-Ue3" id="KEj-g1-1Hk"/>
                                             <outlet property="timeStamp" destination="uzF-zn-uog" id="fcC-g1-hKc"/>
                                         </connections>
@@ -144,7 +143,7 @@
                             </toolbar>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Photo Description..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="K1z-Eq-l2b">
                                 <rect key="frame" x="0.0" y="439" width="375" height="184"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -168,6 +167,7 @@
                             </navigationBar>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imageHolder" translatesAutoresizingMaskIntoConstraints="NO" id="S7m-oR-lNV">
                                 <rect key="frame" x="0.0" y="64" width="375" height="375"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="S7m-oR-lNV" secondAttribute="height" multiplier="1:1" id="1BJ-XF-oFv"/>
                                 </constraints>

@@ -14,6 +14,7 @@ class PhotoAlbumCell: UICollectionViewCell {
     @IBOutlet weak var caption: UILabel!
     @IBOutlet weak var timeStamp: UILabel!
     
+    @IBOutlet weak var optionsButton: UIButton!
     override func prepareForReuse() {
         
     }

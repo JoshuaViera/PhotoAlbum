@@ -13,6 +13,7 @@ class PhotoAlbumDetailVC: UIViewController{
 
     @IBOutlet weak var photo: UIImageView!
     @IBOutlet weak var textField: UITextView!
+    @IBOutlet weak var saveButton: UIBarButtonItem!
     
     private var itemDescriptionPlaceHolder = "Description..."
     let imagePicker =  UIImagePickerController()
@@ -21,36 +22,33 @@ class PhotoAlbumDetailVC: UIViewController{
         super.viewDidLoad()
         setUpTextViews()
         imagePicker.delegate = self
-        imagePicker.sourceType = .photoLibrary
-        
     }
     
     
-    @IBAction func photos(_ sender: UIBarButtonItem) {
-        present(imagePicker, animated: true, completion: nil)
-    }
+    
+    
     
     private func setUpTextViews() {
         textField.delegate = self
         textField.text = itemDescriptionPlaceHolder
-        textField.textColor = .white
+        textField.textColor = .lightGray
     }
     
     @IBAction func save(_ sender: UIBarButtonItem) {
-        guard let itemDescription = textField.text else {fatalError("title, description nil")}
-        
-        //timeStamp base on the current time
+        guard let itemDescription = textField.text, let image = photo.image else {fatalError("title, description nil")}
+         let data = image.jpegData(compressionQuality: 0.5)
         let date = Date()
         let isoDateFormatter = ISO8601DateFormatter()
         isoDateFormatter.formatOptions = [.withFullDate ,.withFullTime,.withInternetDateTime, .withTimeZone,.withDashSeparatorInDate]
         let timeStamp = isoDateFormatter.string(from: date)
-        
-        //create an item
-        let item = Item.init(description: itemDescription, createdAt: timeStamp)
-        
-        //save item to documents directory
+        let item = Item.init(description: itemDescription, createdAt: timeStamp, imageData: data!)
         ItemModel.addItem(item: item)
         dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func photos(_ sender: UIBarButtonItem) {
+        imagePicker.sourceType = .photoLibrary
+        present(imagePicker, animated: true, completion: nil)
     }
     
     @IBAction func camera(_ sender: UIBarButtonItem) {
@@ -59,12 +57,15 @@ class PhotoAlbumDetailVC: UIViewController{
     
     @IBAction func dismiss(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
-        
     }
-    
-    
-    
 }
+
+
+
+
+
+
+
 extension PhotoAlbumDetailVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
@@ -84,7 +85,7 @@ extension PhotoAlbumDetailVC : UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textField.text == itemDescriptionPlaceHolder {
             textView.text = ""
-            textView.textColor = .black
+            textView.textColor = .white
         }
     }
     
