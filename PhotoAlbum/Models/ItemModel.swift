@@ -36,6 +36,11 @@ final class ItemModel {
         items.append(item)
         save()
     }
+    static func edit (item: Item, index: Int) {
+        items.remove(at: index)
+        items.insert(item, at: index)
+        save()
+    }
     
     static func save() {
         let path = DataPersistanceManager.filepathToDocumentDirectory(filename: filename)

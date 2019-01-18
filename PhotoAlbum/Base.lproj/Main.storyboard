@@ -34,7 +34,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imageHolder" translatesAutoresizingMaskIntoConstraints="NO" id="Gt5-JV-Ue3">
-                                                    <rect key="frame" x="8" y="28" width="284" height="189"/>
+                                                    <rect key="frame" x="8" y="28" width="284" height="229.5"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Caption" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="409-9h-b4q">
                                                     <rect key="frame" x="8" y="348.5" width="284" height="24"/>
@@ -49,7 +49,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Q3-v4-9RU">
-                                                    <rect key="frame" x="242" y="217" width="50" height="123.5"/>
+                                                    <rect key="frame" x="242" y="257.5" width="50" height="83"/>
                                                     <state key="normal" image="dot"/>
                                                     <connections>
                                                         <action selector="options:" destination="BYZ-38-t0r" eventType="touchUpInside" id="E6E-nk-dGc"/>
@@ -59,7 +59,7 @@
                                         </view>
                                         <constraints>
                                             <constraint firstAttribute="trailingMargin" secondItem="uzF-zn-uog" secondAttribute="trailing" id="BUu-uj-4Zs"/>
-                                            <constraint firstItem="Gt5-JV-Ue3" firstAttribute="centerY" secondItem="aqv-ml-Whe" secondAttribute="centerY" multiplier="0.6" id="D86-Zp-qWO"/>
+                                            <constraint firstItem="Gt5-JV-Ue3" firstAttribute="centerY" secondItem="aqv-ml-Whe" secondAttribute="centerY" multiplier="0.7" id="D86-Zp-qWO"/>
                                             <constraint firstItem="uzF-zn-uog" firstAttribute="top" secondItem="409-9h-b4q" secondAttribute="bottom" constant="8" id="JQX-Ce-fs9"/>
                                             <constraint firstAttribute="bottomMargin" secondItem="uzF-zn-uog" secondAttribute="bottom" constant="5" id="TLK-OM-WS0"/>
                                             <constraint firstItem="4Q3-v4-9RU" firstAttribute="top" secondItem="Gt5-JV-Ue3" secondAttribute="bottom" id="WVS-vo-eOE"/>
@@ -90,7 +90,7 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="PoI-76-RkW"/>
                                     <barButtonItem systemItem="add" id="ceD-nJ-c1f">
                                         <connections>
-                                            <segue destination="uxk-7t-tL5" kind="presentation" identifier="Glue" id="n9a-wP-zcM"/>
+                                            <action selector="addPhoto:" destination="BYZ-38-t0r" id="c8P-1J-IDB"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="DUz-F4-lGg"/>
@@ -141,7 +141,7 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Photo Description..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="K1z-Eq-l2b">
+                            <textView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Photo Description..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="K1z-Eq-l2b">
                                 <rect key="frame" x="0.0" y="439" width="375" height="184"/>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
@@ -165,7 +165,7 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imageHolder" translatesAutoresizingMaskIntoConstraints="NO" id="S7m-oR-lNV">
+                            <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imageHolder" translatesAutoresizingMaskIntoConstraints="NO" id="S7m-oR-lNV">
                                 <rect key="frame" x="0.0" y="64" width="375" height="375"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -193,6 +193,7 @@
                     </view>
                     <connections>
                         <outlet property="photo" destination="S7m-oR-lNV" id="D1z-S7-paz"/>
+                        <outlet property="saveButton" destination="XhW-If-8aL" id="kN0-OT-aaD"/>
                         <outlet property="textField" destination="K1z-Eq-l2b" id="ZRa-4G-f6v"/>
                     </connections>
                 </viewController>

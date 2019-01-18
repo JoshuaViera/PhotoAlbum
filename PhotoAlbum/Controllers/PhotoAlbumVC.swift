@@ -11,7 +11,6 @@ import UIKit
 class PhotoAlbumVC: UIViewController {
     
     @IBOutlet  weak var collectionView: UICollectionView!
-    public var photoAlbumArr = [UIImage]()
     var items = [Item](){
         didSet{
             collectionView.reloadData()
@@ -33,11 +32,29 @@ class PhotoAlbumVC: UIViewController {
     func setItems() {
         self.items = ItemModel.getItems()
     }
+
+    
+    
+    @IBAction func addPhoto(_ sender: UIBarButtonItem) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let vc = storyboard.instantiateViewController(withIdentifier: "PhotoAlbumDetail") as? PhotoAlbumDetailVC else {return}
+        vc.functions = .save
+        present(vc, animated: true, completion: nil)
+    }
     
     @IBAction func options(_ sender: UIButton) {
+        let indexPath = sender.tag
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let edit = UIAlertAction(title: "Edit", style: .default) { (action) in
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            guard let vc = storyboard.instantiateViewController(withIdentifier: "PhotoAlbumDetail") as? PhotoAlbumDetailVC else {return}
+            if let image = UIImage(data: self.items[indexPath].imageData){
+                vc.selectedImage = image
+                vc.functions = .edit
+                vc.index = indexPath
+            }
+            self.present(vc, animated: true, completion: nil)
             
         }
         let share = UIAlertAction(title: "Share", style: .default) { (action) in
@@ -45,15 +62,14 @@ class PhotoAlbumVC: UIViewController {
         }
         
         let delete = UIAlertAction(title: "Delete", style: .destructive) { (action) in
-           ItemModel.delete(atIndex: sender.tag)
+            ItemModel.delete(atIndex: sender.tag)
             self.setItems()
-            
         }
         actionSheet.addAction(delete)
         actionSheet.addAction(edit)
         actionSheet.addAction(share)
         actionSheet.addAction(cancel)
-        present(actionSheet,animated: true, completion: nil)
+        present(actionSheet, animated: true, completion: nil)
         
     }
 }
@@ -71,7 +87,7 @@ extension PhotoAlbumVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoAlbumCell", for: indexPath) as? PhotoAlbumCell else {return UICollectionViewCell()}
         
-       let item = items[indexPath.row]
+        let item = items[indexPath.row]
         cell.contentView.layer.cornerRadius = 2.0
         cell.contentView.layer.borderWidth = 1.0
         cell.contentView.layer.borderColor = UIColor.clear.cgColor
@@ -82,7 +98,7 @@ extension PhotoAlbumVC: UICollectionViewDataSource {
         cell.layer.shadowOpacity = 1.0
         cell.layer.masksToBounds = false
         cell.layer.shadowPath = UIBezierPath(roundedRect: cell.bounds, cornerRadius: cell.contentView.layer.cornerRadius).cgPath
-
+        
         cell.photo.image = UIImage(data: item.imageData)
         cell.caption.text = item.description
         cell.optionsButton.tag = indexPath.row

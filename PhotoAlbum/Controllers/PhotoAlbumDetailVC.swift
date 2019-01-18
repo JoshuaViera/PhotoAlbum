@@ -9,19 +9,30 @@
 import UIKit
 import AVFoundation
 
-class PhotoAlbumDetailVC: UIViewController{
+enum Functions {
+    case edit
+    case save
+}
 
+class PhotoAlbumDetailVC: UIViewController{
+    
     @IBOutlet weak var photo: UIImageView!
     @IBOutlet weak var textField: UITextView!
     @IBOutlet weak var saveButton: UIBarButtonItem!
+    var selectedImage: UIImage!
+    var functions: Functions!
     
     private var itemDescriptionPlaceHolder = "Description..."
     let imagePicker =  UIImagePickerController()
+    var index = Int()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpTextViews()
         imagePicker.delegate = self
+        if functions == .edit {
+            photo.image = selectedImage
+        }
     }
     
     
@@ -36,14 +47,20 @@ class PhotoAlbumDetailVC: UIViewController{
     
     @IBAction func save(_ sender: UIBarButtonItem) {
         guard let itemDescription = textField.text, let image = photo.image else {fatalError("title, description nil")}
-         let data = image.jpegData(compressionQuality: 0.5)
+        let data = image.jpegData(compressionQuality: 0.5)
         let date = Date()
         let isoDateFormatter = ISO8601DateFormatter()
         isoDateFormatter.formatOptions = [.withFullDate ,.withFullTime,.withInternetDateTime, .withTimeZone,.withDashSeparatorInDate]
         let timeStamp = isoDateFormatter.string(from: date)
         let item = Item.init(description: itemDescription, createdAt: timeStamp, imageData: data!)
-        ItemModel.addItem(item: item)
+        if functions == .edit{
+            ItemModel.edit(item: item, index: index)
+        }
+        if functions == .save {
+            ItemModel.addItem(item: item)
+        }
         dismiss(animated: true, completion: nil)
+        
     }
     
     @IBAction func photos(_ sender: UIBarButtonItem) {
