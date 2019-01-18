@@ -14,12 +14,14 @@ class PhotoAlbumDetailVC: UIViewController{
     @IBOutlet weak var photo: UIImageView!
     @IBOutlet weak var textField: UITextView!
     
+    private var itemDescriptionPlaceHolder = "Description..."
     let imagePicker =  UIImagePickerController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpTextViews()
         imagePicker.delegate = self
         imagePicker.sourceType = .photoLibrary
-        imagePicker.sourceType = .camera
         
     }
     
@@ -28,8 +30,27 @@ class PhotoAlbumDetailVC: UIViewController{
         present(imagePicker, animated: true, completion: nil)
     }
     
+    private func setUpTextViews() {
+        textField.delegate = self
+        textField.text = itemDescriptionPlaceHolder
+        textField.textColor = .white
+    }
+    
     @IBAction func save(_ sender: UIBarButtonItem) {
+        guard let itemDescription = textField.text else {fatalError("title, description nil")}
         
+        //timeStamp base on the current time
+        let date = Date()
+        let isoDateFormatter = ISO8601DateFormatter()
+        isoDateFormatter.formatOptions = [.withFullDate ,.withFullTime,.withInternetDateTime, .withTimeZone,.withDashSeparatorInDate]
+        let timeStamp = isoDateFormatter.string(from: date)
+        
+        //create an item
+        let item = Item.init(description: itemDescription, createdAt: timeStamp)
+        
+        //save item to documents directory
+        ItemModel.addItem(item: item)
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func camera(_ sender: UIBarButtonItem) {
@@ -58,4 +79,13 @@ extension PhotoAlbumDetailVC: UIImagePickerControllerDelegate, UINavigationContr
         }
         dismiss(animated: true, completion: nil)
     }
+}
+extension PhotoAlbumDetailVC : UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textField.text == itemDescriptionPlaceHolder {
+            textView.text = ""
+            textView.textColor = .black
+        }
+    }
+    
 }

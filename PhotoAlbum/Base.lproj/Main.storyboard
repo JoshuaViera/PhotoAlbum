@@ -142,7 +142,7 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Photo Description..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="K1z-Eq-l2b">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Photo Description..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="K1z-Eq-l2b">
                                 <rect key="frame" x="0.0" y="439" width="375" height="184"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
