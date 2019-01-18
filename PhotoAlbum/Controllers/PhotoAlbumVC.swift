@@ -41,6 +41,11 @@ class PhotoAlbumVC: UIViewController {
     
     
 }
+extension PhotoAlbumVC: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize.init(width: 400, height: 400)
+    }
+}
 extension PhotoAlbumVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 10
@@ -50,10 +55,4 @@ extension PhotoAlbumVC: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoAlbumCell", for: indexPath) as? PhotoAlbumCell else {return UICollectionViewCell()}
         return cell
     }
-}
-extension PhotoAlbumVC: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize.init(width: 400, height: 400)
-    }
-    
 }

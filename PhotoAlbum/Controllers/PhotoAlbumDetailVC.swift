@@ -9,32 +9,36 @@
 import UIKit
 import AVFoundation
 
-class PhotoAlbumDetailVC: UIViewController {
+class PhotoAlbumDetailVC: UIViewController{
 
     @IBOutlet weak var photo: UIImageView!
     @IBOutlet weak var textField: UITextView!
     
+    let imagePicker =  UIImagePickerController()
     override func viewDidLoad() {
         super.viewDidLoad()
+        imagePicker.delegate = self
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.sourceType = .camera
         
     }
     
     
     @IBAction func photos(_ sender: UIBarButtonItem) {
-        
-    
+        present(imagePicker, animated: true, completion: nil)
     }
     
     @IBAction func save(_ sender: UIBarButtonItem) {
+        
     }
     
     @IBAction func camera(_ sender: UIBarButtonItem) {
+        
     }
-    
-    
     
     @IBAction func dismiss(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
+        
     }
     
     
