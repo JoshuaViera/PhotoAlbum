@@ -21,6 +21,7 @@ class PhotoAlbumDetailVC: UIViewController{
     @IBOutlet weak var saveButton: UIBarButtonItem!
     var selectedImage: UIImage!
     var functions: Functions!
+//    var imageWasSelected = Bool()
     
     private var itemDescriptionPlaceHolder = "Description..."
     let imagePicker =  UIImagePickerController()
@@ -29,16 +30,14 @@ class PhotoAlbumDetailVC: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpTextViews()
+//        showSaveButton()
         imagePicker.delegate = self
         if functions == .edit {
             photo.image = selectedImage
+//            saveButton.isEnabled = false
         }
     }
-    
-    
-    
-    
-    
+
     private func setUpTextViews() {
         textField.delegate = self
         textField.text = itemDescriptionPlaceHolder
@@ -63,13 +62,13 @@ class PhotoAlbumDetailVC: UIViewController{
         
     }
     
+    
     @IBAction func photos(_ sender: UIBarButtonItem) {
         imagePicker.sourceType = .photoLibrary
         present(imagePicker, animated: true, completion: nil)
     }
     
     @IBAction func camera(_ sender: UIBarButtonItem) {
-        
     }
     
     @IBAction func dismiss(_ sender: UIBarButtonItem) {
@@ -92,6 +91,7 @@ extension PhotoAlbumDetailVC: UIImagePickerControllerDelegate, UINavigationContr
         print("\ninfo: \(info)\n")
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             photo.image = image
+//            imageWasSelected = true
         } else {
             print("original image is nil")
         }
@@ -104,6 +104,6 @@ extension PhotoAlbumDetailVC : UITextViewDelegate {
             textView.text = ""
             textView.textColor = .white
         }
+//        showSaveButton()
     }
-    
 }
